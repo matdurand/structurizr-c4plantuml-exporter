@@ -28,7 +28,7 @@ docker run -v "/myStructurizrModel:/workspace" structurizr-c4plant-layout-export
 
 ## Why?
 
-By default, Structurizr don't care much about layout, because if you use Structurizr online or Structurizr Lite, you can adjust the diagrams manually and the positions would be recorded.
+By default, Structurizr doesn't care much about layout, because if you use Structurizr online or Structurizr Lite, you can adjust the diagrams manually and the positions would be recorded.
 
 I wanted to use Structurizr but still use the auto-layout and have a bit more control over the layout, hence this small POC was born.
 
