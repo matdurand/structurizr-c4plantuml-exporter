@@ -16,14 +16,14 @@ and it would make the relationshiop from container1 to container2 exit on the ri
 
 ## Quick start
 
-1. Checkout this project
-2. Build the docker image
+1. Pull the docker image
 ```bash
-docker build . -t structurizr-c4plant-layout-exporter
+docker pull matdurand/structurizr-c4plantuml-layout-exporter:latest
 ```
-3. Use the docker image
+
+2. Use the docker image
 ```bash
-docker run -v "/myStructurizrModel:/workspace" structurizr-c4plant-layout-exporter /workspace/workspace.dsl /workspace/generated
+docker run -v "/myStructurizrModel:/workspace" matdurand/structurizr-c4plantuml-layout-exporter:latest /workspace/workspace.dsl /workspace/generated
 ```
 
 ## Why?
