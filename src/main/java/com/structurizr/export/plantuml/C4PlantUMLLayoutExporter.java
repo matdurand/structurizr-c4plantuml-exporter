@@ -4,9 +4,9 @@ import com.structurizr.Workspace;
 import com.structurizr.dsl.IdentifiersRegister;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
-import com.structurizr.export.plantuml.C4PlantUMLExporter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
+import com.structurizr.view.ModelView;
 import com.structurizr.view.RelationshipView;
 import com.structurizr.view.View;
 
@@ -29,7 +29,7 @@ public class C4PlantUMLLayoutExporter {
             this.identifiersRegister = identifiersRegister;
         }
 
-        protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+        protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
             Relationship relationship = relationshipView.getRelationship();
             Element source = relationship.getSource();
             Element destination = relationship.getDestination();
@@ -97,7 +97,7 @@ public class C4PlantUMLLayoutExporter {
             }
         }
 
-        private String tagsOf(View view, Relationship relationship) {
+        private String tagsOf(ModelView view, Relationship relationship) {
             if (includeTags(view)) {
                 return view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship).getTag().replaceFirst("Relationship,", "");
             } else {
