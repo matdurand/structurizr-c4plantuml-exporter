@@ -78,6 +78,13 @@ public class C4PlantUMLLayoutExporter {
                         relationCommand = "Rel_D";
                     }
                 }
+
+                String showDescriptionOverride = lowerProps.get("c4plantuml.relationships.description");
+                if (showDescriptionOverride != null) {
+                    if (showDescriptionOverride.equalsIgnoreCase("false")) {
+                        description = "";
+                    }
+                }
             }
 
             if (StringUtils.isNullOrEmpty(relationship.getTechnology())) {
