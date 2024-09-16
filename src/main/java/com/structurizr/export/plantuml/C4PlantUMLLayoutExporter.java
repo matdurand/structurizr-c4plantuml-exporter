@@ -80,6 +80,13 @@ public class C4PlantUMLLayoutExporter {
                 }
             }
 
+            String showDescriptionOverride = lowerProps.get("c4plantuml.relationships.description");
+            if (showDescriptionOverride != null) {
+                if (showDescriptionOverride.equalsIgnoreCase("false")) {
+                    description = "";
+                }
+            }
+
             if (StringUtils.isNullOrEmpty(relationship.getTechnology())) {
                 writer.writeLine(format("%s(%s, %s, \"%s\", $tags=\"%s\")", relationCommand, idOf(source), idOf(destination), description, tagsOf(view, relationship)));
             } else {

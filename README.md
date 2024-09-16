@@ -1,6 +1,9 @@
 #  structurizr-c4plantuml-layout-exporter
 
-This project is about being able to add some functionality to the structirizr PlantUML C4 export, like for example being able to add some layout options between elements.
+This project is about being able to add some functionality to the structirizr PlantUML C4 export.
+
+## Directions
+Add the capability to specify some layout options between elements.
 
 For example, in the DSL you could do this
 ```
@@ -13,6 +16,22 @@ container mySystem "Containers" {
 }
 ```
 and it would make the relationshiop from container1 to container2 exit on the right of container1.
+
+
+## Relationship labels
+
+Sometimes it's useful in context diagrams to remove the relationship labels because they just clutter the diagram.
+
+```
+systemContext mySystem "systemcontext-mysystem" {
+    title "Some title"
+    include *
+    autoLayout lr
+    properties {
+        c4plantuml.relationships.description false
+    }
+}
+```
 
 ## Quick start
 
@@ -39,4 +58,3 @@ It works in 2 steps
 
 1. Read the DSL and create a workspace. We need the DSL, because when the DSL is parsed, there is identity table being build with the name of the elements referenced in the DSL. When we reach the exporter, these names are gone, but we need them because there are going to be referenced in the `properties` of the diagram.
 2. Pass both the workspace and identity table to the modified C4 PlantUML exporter. When rendering a relationshop, the exporter will look for some properties in the view to change the layout options.
-
