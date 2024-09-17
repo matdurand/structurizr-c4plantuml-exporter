@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: matdurand/structurizr-c4plantuml-layout-exporter
+          images: matdurand/structurizr-c4plantuml-exporter
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4

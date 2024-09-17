@@ -6,17 +6,13 @@ import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
-import com.structurizr.view.ModelView;
-import com.structurizr.view.RelationshipView;
-import com.structurizr.view.View;
+import com.structurizr.view.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.String.format;
 
-public class C4PlantUMLLayoutExporter {
+public class C4PlantUMLEnhancedExporter {
     public final Collection<Diagram> exportWithLayout(Workspace workspace, IdentifiersRegister identifiersRegister) {
         LayoutExporter exporter = new LayoutExporter(identifiersRegister);
         return exporter.export(workspace);
@@ -55,7 +51,7 @@ public class C4PlantUMLLayoutExporter {
 
             description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");
 
-            String relationCommand = "Rel_D";
+            String relationCommand = "Rel";
             Map<String, String> props = view.getProperties();
             if (props != null && props.size() > 0) {
                 Map<String, String> lowerProps = new HashMap<>(props.size());
@@ -87,11 +83,21 @@ public class C4PlantUMLLayoutExporter {
                 }
             }
 
-            if (StringUtils.isNullOrEmpty(relationship.getTechnology())) {
-                writer.writeLine(format("%s(%s, %s, \"%s\", $tags=\"%s\")", relationCommand, idOf(source), idOf(destination), description, tagsOf(view, relationship)));
-            } else {
-                writer.writeLine(format("%s(%s, %s, \"%s\", \"%s\", $tags=\"%s\")", relationCommand, idOf(source), idOf(destination), description, relationship.getTechnology(), tagsOf(view, relationship)));
+            String technology = relationship.getTechnology();
+            if (StringUtils.isNullOrEmpty(technology)) {
+                technology = "";
             }
+
+            String url = relationship.getUrl();
+            if (StringUtils.isNullOrEmpty(url)) {
+                url = "";
+            }
+
+            // Rel(from, to, label, ?techn, ?descr, ?sprite, ?tags, ?link)
+            writer.writeLine(
+                    format("%s(%s, %s, \"%s\", $techn=\"%s\", $tags=\"%s\", $link=\"%s\")", relationCommand,
+                            idOf(source), idOf(destination), description, technology, tagsOf(view, relationship), url)
+            );
         }
 
         private void addProperties(View view, IndentingWriter writer, ModelItem element) {

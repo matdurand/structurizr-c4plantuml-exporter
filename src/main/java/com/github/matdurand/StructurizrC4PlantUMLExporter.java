@@ -1,6 +1,6 @@
 package com.github.matdurand;
 
-import com.structurizr.export.plantuml.C4PlantUMLLayoutExporter;
+import com.structurizr.export.plantuml.C4PlantUMLEnhancedExporter;
 import com.structurizr.Workspace;
 import com.structurizr.dsl.StructurizrDslParser;
 import com.structurizr.export.Diagram;
@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
 
-public class StructurizrC4PlantUMLLayoutExporter {
+public class StructurizrC4PlantUMLExporter {
     public static void main(String[] args) {
 
         if (args.length < 2 || args.length > 3) {
@@ -61,7 +61,7 @@ public class StructurizrC4PlantUMLLayoutExporter {
             System.exit(1);
         }
 
-        C4PlantUMLLayoutExporter exporter = new C4PlantUMLLayoutExporter();
+        C4PlantUMLEnhancedExporter exporter = new C4PlantUMLEnhancedExporter();
         Collection<Diagram> diagrams = exporter.exportWithLayout(parser.getWorkspace(), parser.getIdentifiersRegister());
 
         for (Diagram diagram : diagrams) {
